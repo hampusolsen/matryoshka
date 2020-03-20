@@ -31,7 +31,7 @@
                 justify-content: center;
             }
             &.content-table__cell {
-                &--media, &--modified, &--size, &--type {
+                &--name, &--modified, &--size, &--type {
                     svg {
                         margin-left: 8px;
                         font-size: 1rem;
@@ -58,7 +58,7 @@
 			width: 56px;
 			text-align: center;
         }
-        &--media {
+        &--name {
         }
         &--modified {
         }

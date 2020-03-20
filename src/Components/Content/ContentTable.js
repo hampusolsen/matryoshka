@@ -8,30 +8,22 @@ import { checkAllEntries } from '../../utils/SystemActions';
 // Components
 import ContentMoreFiles from './ContentMoreFiles';
 import ContentTableEntry from './ContentTableEntry';
-import ContentTableSortMenu from './ContentTableSortMenu';
 
 // Icons
 import { ReactComponent as CheckboxAllFilled } from '../../assets/checkbox-all-filled.svg';
 import { ReactComponent as CheckboxAllEmpty } from '../../assets/checkbox-all-empty.svg';
-import SwapVertIcon from '@material-ui/icons/SwapVert';
-import TextRotateUpIcon from '@material-ui/icons/TextRotateUp';
 
 // Helpers
 import { getCompareFunction } from './helpers';
+import ContentTableHeader from './ContentTableHeader';
 
 const ContentTable = () => {
     const setGlobalState = useDispatch();
     const [sortingOptions, setSortingOptions] = useState({ type: '', order: '' });
-    const { type, order } = sortingOptions;
     const files = useSelector(state => state.files);
     const { entries, has_more } = files;
 
-    function sort({ type, order }) {
-        if (type === sortingOptions.type && order === sortingOptions.order) {
-            setSortingOptions({ type: '', order: '' });
-        }
-        else setSortingOptions({ type, order });
-    }
+    console.log(sortingOptions);
 
     return (
         <>
@@ -47,69 +39,29 @@ const ContentTable = () => {
                                 <CheckboxAllFilled />
                             </div>
                         </th>
-                        <th className='content-table__cell content-table__cell--media'>
-                            <div>
-                                Name
-                                {!(type === 'name') &&
-                                    <SwapVertIcon />}
-                                {(type === 'name' && order === 'descending') &&
-                                    <TextRotateUpIcon />}
-                                {(type === 'name' && order === 'ascending') &&
-                                    <TextRotateUpIcon style={{ transform: 'rotate(180deg)' }} />}
-                                <ContentTableSortMenu
-                                    type={'name'}
-                                    setSortingOptions={sort} />
-                            </div>
-                        </th>
-                        <th className='content-table__cell content-table__cell--modified'>
-                            <div>
-                                Modified
-                                {!(type === 'modified') &&
-                                    <SwapVertIcon />}
-                                {(type === 'modified' && order === 'descending') &&
-                                    <TextRotateUpIcon />}
-                                {(type === 'modified' && order === 'ascending') &&
-                                    <TextRotateUpIcon style={{ transform: 'rotate(180deg)' }} />}
-                                <ContentTableSortMenu
-                                    type={'modified'}
-                                    setSortingOptions={sort} />
-                            </div>
-                        </th>
-                        <th className='content-table__cell content-table__cell--size'>
-                            <div>
-                                Size
-                                {!(type === 'size') &&
-                                    <SwapVertIcon />}
-                                {(type === 'size' && order === 'descending') &&
-                                    <TextRotateUpIcon />}
-                                {(type === 'size' && order === 'ascending') &&
-                                    <TextRotateUpIcon style={{ transform: 'rotate(180deg)' }} />}
-                                <ContentTableSortMenu
-                                    type={'size'}
-                                    setSortingOptions={sort} />
-                            </div>
-                        </th>
-                        <th className='content-table__cell content-table__cell--type'>
-                            <div>
-                                Type
-                                {!(type === 'type') &&
-                                    <SwapVertIcon />}
-                                {(type === 'type' && order === 'descending') &&
-                                    <TextRotateUpIcon />}
-                                {(type === 'type' && order === 'ascending') &&
-                                    <TextRotateUpIcon style={{ transform: 'rotate(180deg)' }} />}
-                                <ContentTableSortMenu
-                                    type={'type'}
-                                    setSortingOptions={sort} />
-                            </div>
-                        </th>
+                        <ContentTableHeader
+                            type='name'
+                            sortingOptions={sortingOptions}
+                            setSortingOptions={setSortingOptions} />
+                        <ContentTableHeader
+                            type='modified'
+                            sortingOptions={sortingOptions}
+                            setSortingOptions={setSortingOptions} />
+                        <ContentTableHeader
+                            type='size'
+                            sortingOptions={sortingOptions}
+                            setSortingOptions={setSortingOptions} />
+                        <ContentTableHeader
+                            type='type'
+                            sortingOptions={sortingOptions}
+                            setSortingOptions={setSortingOptions} />
                         <th className='content-table__cell content-table__cell--menu'>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     {entries
-                        .sort(getCompareFunction({ type, order }))
+                        .sort(getCompareFunction(sortingOptions))
                         .map(entry => (
                             <ContentTableEntry key={entry.id} entry={entry} />
                         ))}

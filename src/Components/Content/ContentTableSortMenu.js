@@ -2,9 +2,11 @@ import React from 'react';
 
 const ContentTableSortMenu = ({ type, setSortingOptions }) => {
     function onClick(order) {
-        setSortingOptions({ type, order });
+        const sortingOptions = { type, order };
+
+        setSortingOptions(sortingOptions);
     }
-    
+
     return (
         <ul className='content-table__sort-menu'>
             <li className="content-table__sort-menu__item">

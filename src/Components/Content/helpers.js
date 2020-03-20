@@ -34,16 +34,8 @@ function compareDateStrings(modified, current = currentDate) {
 const currentDate = new Date().toLocaleDateString('sv-SE');
 
 // Compare functions
-function compareNone(a, b) {
+function compareNone() {
     return 0;
-}
-
-function compareNameAscending(a, b) {
-    return a.name.localeCompare(b.name);
-}
-
-function compareNameDescending(a, b) {
-    return b.name.localeCompare(a.name);
 }
 
 function compareModifiedAscending(a, b) {
@@ -54,6 +46,14 @@ function compareModifiedAscending(a, b) {
 function compareModifiedDescending(a, b) {
     if (!a.client_modified || !b.client_modified) return 1;
     return a.client_modified.localeCompare(b.client_modified);
+}
+
+function compareNameAscending(a, b) {
+    return a.name.localeCompare(b.name);
+}
+
+function compareNameDescending(a, b) {
+    return b.name.localeCompare(a.name);
 }
 
 function compareSizeAscending(a, b) {
@@ -79,22 +79,22 @@ const MODIFIED = 'modified';
 const TYPE = 'type';
 
 // Gets selected type and order to sort by and returns corresponding compare function
-export function getCompareFunction({ type, order }) {
-    switch (type) {
+export function getCompareFunction(sortingOptions) {
+    switch (sortingOptions.type) {
         case NAME:
-            return order === 'ascending'
+            return sortingOptions.order === 'ascending'
                 ? compareNameAscending
                 : compareNameDescending;
         case MODIFIED:
-            return order === 'ascending'
+            return sortingOptions.order === 'ascending'
                 ? compareModifiedAscending
                 : compareModifiedDescending;
         case SIZE:
-            return order === 'ascending'
+            return sortingOptions.order === 'ascending'
                 ? compareSizeAscending
                 : compareSizeDescending;
         case TYPE:
-            return order === 'ascending'
+            return sortingOptions.order === 'ascending'
                 ? compareTypeAscending
                 : compareTypeDescending;
         default:
