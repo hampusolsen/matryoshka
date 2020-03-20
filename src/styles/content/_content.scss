@@ -1,0 +1,107 @@
+.content {
+    grid-area: content; // defined in _home.scss
+    background-color: $bodyColor;
+    color: whitesmoke;
+    padding: 22px;
+    padding-top: 0px;
+    overflow: scroll;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.content-table {
+    background-color: $contentBackground;
+    width: 100%;
+    position: relative;
+    text-align: left;
+    border-radius: 4px;
+    font-family: 'Lato';
+    &__thead {
+        th {
+            background-color: $contentBackground;
+            height: 56px;
+            position: sticky;
+            top: 0;
+            font-weight: 600;
+            z-index: 10;
+            .content-table__icon-checkbox-all {
+                display: flex;
+                justify-content: center;
+            }
+            &.content-table__cell {
+                &--media, &--modified, &--size, &--type {
+                    svg {
+                        margin-left: 8px;
+                        font-size: 1rem;
+                     }
+                }
+            }
+        }
+    }
+    &__row {
+        height: 56px;
+        &:hover {
+            background-color: rgb(54, 54, 54);
+        }
+    }
+    &__cell {
+        vertical-align: middle;
+        padding: 12px 16px;
+            > div {
+                display: flex;
+                align-items: center;
+            }
+        &--checkbox {
+            padding: 16px;
+			width: 56px;
+			text-align: center;
+        }
+        &--media {
+        }
+        &--modified {
+        }
+        &--size {
+            width: 102px; 
+            text-align: right;
+        }
+        &--type {
+            width: 204px;
+        }
+        &--menu {
+            width: 56px;
+        }
+    }
+    &__icon {
+        margin-top: 5px;
+		margin-right: 12px;
+		&--checkbox-all {
+			position: relative;
+			height: 24px;
+			width: 24px;
+			display: flex;
+            justify-content: center;
+            input {
+                height: 100%;
+                width: 100%;
+                appearance: none;
+                &:checked {
+                    ~ svg:first-of-type { opacity: 0; }
+                    ~ svg:last-of-type { opacity: 1; }
+                }
+            }
+            svg {
+				position: absolute;
+                transition: .2s;
+                pointer-events: none;
+                &:first-of-type { opacity: 1; }
+                &:last-of-type { opacity: 0; }
+			}
+			&:hover {
+				svg:first-of-type { opacity: 0; }
+				svg:last-of-type { opacity: 1; }
+            }
+		}
+    }
+}

@@ -1,0 +1,21 @@
+// boilerplate scss
+@import './fonts';
+@import './variables';
+@import './reset';
+@import './breakpoints';
+@import './utils';
+
+// modules
+@import './landing/landing';
+@import './home/home';
+@import './footer/footer';
+@import './header/header';
+@import './sidebar/sidebar';
+@import './content/content';
+
+body {
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+}
+

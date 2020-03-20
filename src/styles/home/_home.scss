@@ -1,0 +1,10 @@
+.home {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    display: grid;
+    grid-template:
+        "sidebar header" 122px
+        "sidebar content" calc(100% - 122px - 68px)
+        "sidebar footer" 68px
+        / 252px auto;   
+}

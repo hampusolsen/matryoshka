@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { Route, Switch } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import './styles/App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// Animations ///
+import { preventFlashingOnLoad } from "./utils/animations";
+
+// Components ///
+import Home from "./Components/Home/Home";
+import Landing from "./Components/Landing/Landing";
+
+// Utilities ///
+import { debounce } from "./utils/helpers";
+
+const App = () => {
+	const [dimensions, setDimensions] = useState({
+		height: window.innerHeight,
+		width: window.innerWidth
+	});
+
+	useEffect(
+		() => {
+			preventFlashingOnLoad();
+
+			const vh = dimensions.height * 0.01;
+			document.documentElement.style.setProperty("--vh", `${vh}px`);
+
+			const handleResize = debounce(() => {
+				setDimensions({
+					height: window.innerHeight,
+					width: window.innerWidth
+				});
+			}, 150);
+
+			window.addEventListener("resize", handleResize);
+
+			return () => {
+				window.removeEventListener("resize", handleResize);
+			};
+		},
+		[dimensions]
+	);
+
+	return (
+		<React.Fragment>
+			<Helmet>
+				<title>matryoshka - A subjectively prettier Dropbox</title>
+			</Helmet>
+			<Switch>
+				<Route exact path="/login" component={Landing} />
+				<Route path="/" component={Home} />
+			</Switch>
+		</React.Fragment>
+	);
+};
 
 export default App;

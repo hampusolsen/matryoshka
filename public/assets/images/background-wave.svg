@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 468">
+  <defs>
+    <style>
+      .background-wave-a {
+        fill: #efefef;
+      }
+
+      .background-wave-b {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>background-wave</title>
+  <path class="background-wave-a" d="M1920,767.77V1080H0V612s25.76.14,72,2.3C206.39,620.6,513.92,644,863,731.13,1332,848.13,1920,767.77,1920,767.77Z" transform="translate(0 -612)"/>
+  <path class="background-wave-b" d="M1920,820.07V1080H0V612s25.76.14,72,2.3C216.41,625.22,522.62,658,865.9,753.09,1278.36,867.31,1789.79,831.72,1920,820.07Z" transform="translate(0 -612)"/>
+</svg>
