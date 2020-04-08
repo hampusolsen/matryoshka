@@ -11,55 +11,132 @@
     align-items: center;
 }
 
+%flexAlignCenter {
+  display: flex;
+  align-items: center;
+}
+
+%spaceBetween {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 // @mixins //////////////////////////
 // draw button border animation
-@mixin btn-border-drawing($color: #ccc, $hover: black, $width: 2px, $vertical: top, $horizontal: left, $duration: 0.25s) {
-    box-shadow: inset 0 0 0 $width $color;
-    color: $color;
-    transition: color $duration $duration/3;
-    position: relative;
+@mixin btn-border-drawing(
+  $color: #ccc, 
+  $hover: black,
+  $width: 2px, 
+  $vertical: top, 
+  $horizontal: left, 
+  $duration: 0.25s) 
+{
+  box-shadow: inset 0 0 0 $width $color;
+  color: $color;
+  transition: color $duration $duration/3;
+  position: relative;
+  
+  &::before,
+  &::after {
+    border: 0 solid transparent;
+    box-sizing: border-box;
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    width: 0; 
+    height: 0;
+    
+    #{$vertical}: 0; 
+    #{$horizontal}: 0;
+  }
+
+  &::before {
+    $h-side: if($horizontal == 'left', 'right', 'left');
+    
+    border-#{$vertical}-width: $width;
+    border-#{$h-side}-width: $width;
+  }
+  
+  &::after {
+    $v-side: if($vertical == 'top', 'bottom', 'top');
+    
+    border-#{$v-side}-width: $width;
+    border-#{$horizontal}-width: $width;
+  }
+  
+  &:hover {
+    color: $hover;
     
     &::before,
     &::after {
-      border: 0 solid transparent;
-      box-sizing: border-box;
-      content: '';
-      pointer-events: none;
-      position: absolute;
-      width: 0; 
-      height: 0;
-      
-      #{$vertical}: 0; 
-      #{$horizontal}: 0;
-    }
-  
-    &::before {
-      $h-side: if($horizontal == 'left', 'right', 'left');
-      
-      border-#{$vertical}-width: $width;
-      border-#{$h-side}-width: $width;
+      border-color: $hover;
+      transition: border-color 0s, width $duration, height $duration;
+      width: 100%;
+      height: 100%;
     }
     
-    &::after {
-      $v-side: if($vertical == 'top', 'bottom', 'top');
-      
-      border-#{$v-side}-width: $width;
-      border-#{$horizontal}-width: $width;
-    }
+    &::before { transition-delay: 0s, 0s, $duration; }
     
-    &:hover {
-      color: $hover;
-      
-      &::before,
-      &::after {
-        border-color: $hover;
-        transition: border-color 0s, width $duration, height $duration;
-        width: 100%;
-        height: 100%;
-      }
-      
-      &::before { transition-delay: 0s, 0s, $duration; }
-      
-      &::after { transition-delay: 0s, $duration, 0s; }
-    }
+    &::after { transition-delay: 0s, $duration, 0s; }
   }
+}
+
+// slide and fade in underline from below
+@mixin link-underline-effect(
+  $hover: $matrPink,
+  $type: underline,
+  $offset: 0.5rem,
+  $duration: 0.2s,
+  )
+{
+  text-decoration: $type;
+  text-underline-offset: $offset;
+  text-decoration-color: rgba($color: #000000, $alpha: 0);
+  text-decoration-thickness: 2px;
+  &:hover {
+      transition: $duration;
+      color: $matrPink;
+      text-decoration: $type;
+      text-underline-offset: 0.25rem;
+      text-decoration-thickness: 2px;
+  }
+}
+
+%buttonDefaults {
+  @extend %flexCC;
+  min-width: 64px;
+  height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 0.875;
+  padding: 0 16px;
+  transition: .2s;
+}
+
+// standard button styling
+@mixin matr-button-filled(
+  $bgColor: $matrPink,
+  $hover: rgb(255, 117, 140),
+  $active: rgb(224, 45, 75),
+  $color: white,
+) {
+  @extend %buttonDefaults;
+  color: $color;
+  background-color: $bgColor;
+  &:hover { background-color: $hover; }
+  &:active { background-color: $active; }
+}
+
+@mixin matr-button-text(
+  $color: $matrPink,
+  $hover: rgba(241, 56, 87, 0.2),
+  $active: rgba(241, 56, 87, 0.5),
+) {
+  @extend %buttonDefaults;
+  color: $color;
+  &:hover { background-color: $hover; }
+  &:active { background-color: $active; }
+}

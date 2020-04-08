@@ -1,3 +1,51 @@
 .sidebar {
     grid-area: sidebar; // defined in _home.scss
+    padding: 32px;
+    overflow: hidden;
+    &__menu {
+        margin-top: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    &__menu-item {
+        height: 36px;
+        margin: 6px 0px;
+        a, button {
+            padding: 0 12px;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: $matrPink;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            span {
+                color: #333;
+                position: relative;
+                transition: .2s;
+                &::after {
+                    content: '';
+                    height: 1rem;
+                    width: 3px;
+                    position: absolute;
+                    left: -12px;
+                    top: 1px;
+                    background-color: $matrPink;
+                    border-radius: 1px;
+                    opacity: 0;
+                    transform: translateX(-8px);
+                    transition: .2s;
+                }
+            }
+            &:hover span {
+                color: $matrPink;
+                &::after {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+        }
+    }
 }

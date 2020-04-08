@@ -9,7 +9,6 @@ import TextRotateUpIcon from '@material-ui/icons/TextRotateUp';
 import { capitalizeFirstLetter } from './helpers';
 
 const ContentTableHeader = ({ type, sortingOptions, setSortingOptions }) => {
-
     function sort({ type, order }) {
         if (type === sortingOptions.type && order === sortingOptions.order) {
             setSortingOptions({ type: '', order: '' });

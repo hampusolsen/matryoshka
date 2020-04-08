@@ -3,9 +3,9 @@
     <style>
       .logo-a {
         fill: none;
-        stroke: #000;
+        stroke: #222;
         stroke-miterlimit: 10;
-        stroke-width: 6px;
+        stroke-width: 4px;
       }
     </style>
   </defs>

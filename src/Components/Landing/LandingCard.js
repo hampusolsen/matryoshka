@@ -12,13 +12,6 @@ const LandingCard = () => {
         <section className='card'>
             <LandingCardHeader />
             <div className='card__connect'>
-                <p>
-                    I{' '}
-                    <span role='img' aria-label='heart'>
-                        💗
-					</span>{' '}
-					Dropbox. So I made this!
-				</p>
                 <a href={dbx.getAuthenticationUrl('http://localhost:3000/')}>
                     Connect with Dropbox
 				</a>

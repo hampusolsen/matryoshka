@@ -1,3 +1,5 @@
 {
-    "git.enabled": false
+    "git.enabled": false,
+    "eslint.codeActionsOnSave.mode": "problems",
+    "eslint.format.enable": true
 }

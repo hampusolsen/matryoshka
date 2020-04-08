@@ -12,6 +12,10 @@
 @import './header/header';
 @import './sidebar/sidebar';
 @import './content/content';
+@import './profile/profile';
+@import './loadingAnimation/loadingAnimation';
+@import './confirmDeletion/confirmDeletion';
+@import './createFolder/createFolder';
 
 body {
     visibility: hidden;

@@ -28,9 +28,10 @@ const Home = () => {
             if (authenticateUser(hash)) setGlobalState(setLoggedIn(true));
             else setGlobalState(setLoggedIn(false));
 
-            fetchUserInformation().then((profile) => {
-                setGlobalState(setUser(profile));
-            });
+            fetchUserInformation()
+                .then((profile) => {
+                    setGlobalState(setUser(profile));
+                });
         },
         [hash, setGlobalState]
     );
@@ -38,7 +39,6 @@ const Home = () => {
     return (
         <>
             {loggedIn === false && <Redirect to="/login" />}
-            {loggedIn && <Redirect to="/" />}
             <div className="home">
                 <Sidebar />
                 <Header />

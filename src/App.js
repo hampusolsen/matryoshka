@@ -21,7 +21,7 @@ const App = () => {
 
 	useEffect(
 		() => {
-			preventFlashingOnLoad();
+			preventFlashingOnLoad('body');
 
 			const vh = dimensions.height * 0.01;
 			document.documentElement.style.setProperty("--vh", `${vh}px`);

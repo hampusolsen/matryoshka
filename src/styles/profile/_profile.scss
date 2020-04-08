@@ -1,0 +1,70 @@
+.profile {
+    @extend %flexColumnCenter;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    &__logo {
+        height: 110px;
+        margin-bottom: 32px;
+        color: rgb(241, 56, 87);
+    }
+    &__user-information {
+        color: #444;
+        font-size: 0.8rem;
+        svg { 
+            color: rgb(241, 56, 87); 
+            margin-right: 8px;
+        }
+        &--name {
+            @extend %flexAlignCenter;
+            line-height: 0;
+        }
+        &--email {
+            @extend %flexAlignCenter;
+            margin-bottom: 12px;
+            text-indent: 0.5px;
+        }
+        &--space-usage {
+            @extend %spaceBetween;
+            span:first-of-type { color: rgb(241, 56, 87); }
+        }
+        &--space-allocated {
+            margin-top: 4px;
+            margin-bottom: 32px;
+            height: 3px;
+            border-radius: 1px;
+            background-color: #333;
+        }
+        &--space-used {
+            background-color: rgb(241, 56, 87);
+            height: 100%;
+        }
+    }
+    &__menu {
+        display: flex;
+        height: 36px;
+        &--referral-link, &--signout-button {
+            @extend %flexCC;
+            background-color: rgb(241, 56, 87);
+            height: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+            &:hover { background-color: rgb(255, 117, 140);}
+            &:active { background-color: rgb(224, 45, 75);}
+        }
+        &--referral-link {
+            width: 36px;
+            margin-right: 12px;
+            input {
+                position: absolute;
+                top: -1000px;
+            }
+        }
+        &--signout-button {
+            min-width: 64px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            padding: 0 16px;
+        }
+    }
+}

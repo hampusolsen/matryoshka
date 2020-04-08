@@ -1,12 +1,14 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import HeaderBreadcrumbs from "./HeaderBreadcrumbs";
+import HeaderSearchBar from "./HeaderSearchBar";
 
 const Header = () => {
-    const { pathname } = useLocation();
-
     return (
         <header className="header">
-            matryoshka {pathname}
+            <div className="header__content">
+                <HeaderBreadcrumbs />
+                <HeaderSearchBar />
+            </div>
         </header>
     );
 };

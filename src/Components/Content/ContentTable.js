@@ -1,9 +1,9 @@
 // Libraries
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Actions
-import { checkAllEntries } from '../../utils/SystemActions';
+import { checkAllEntries, setFiles } from '../../utils/SystemActions';
 
 // Components
 import ContentMoreFiles from './ContentMoreFiles';
@@ -16,14 +16,16 @@ import { ReactComponent as CheckboxAllEmpty } from '../../assets/checkbox-all-em
 // Helpers
 import { getCompareFunction } from './helpers';
 import ContentTableHeader from './ContentTableHeader';
+import { useEffect } from 'react';
+import { preventFlashingOnLoad } from '../../utils/animations';
 
-const ContentTable = () => {
+const ContentTable = ({entries, has_more}) => {
     const setGlobalState = useDispatch();
     const [sortingOptions, setSortingOptions] = useState({ type: '', order: '' });
-    const files = useSelector(state => state.files);
-    const { entries, has_more } = files;
 
-    console.log(sortingOptions);
+    useEffect(() => {
+        preventFlashingOnLoad('.content-table');
+    }, [])
 
     return (
         <>
@@ -67,7 +69,7 @@ const ContentTable = () => {
                         ))}
                 </tbody>
             </table>
-            {has_more && <ContentMoreFiles />}
+            {has_more && <ContentMoreFiles setFiles={(entries) => setGlobalState(setFiles(entries))}/>}
         </>
     );
 }

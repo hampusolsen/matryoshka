@@ -1,0 +1,60 @@
+.confirm-deletion {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 0 22px rgba($color: #000000, $alpha: 0.7);
+    animation: slideIn .4s ease-out;
+    &__btn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 32px;
+    }
+    &__btn {
+        &--accept {
+            @include matr-button-filled();
+            margin-right: 12px;
+        }
+        &--cancel { @include matr-button-text(); }
+    }
+    &__information {
+        font-family: 'Roboto', sans-serif;
+        font-size: 0.675rem;
+        text-align: center;
+        padding: 18px 22px;
+        span {
+            color: $matrPink;
+            font-style: italic;
+        }
+    }
+    &__modal {
+        @extend %flexCC;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba($color: #000000, $alpha: 0.1);
+        position: absolute;
+        top: 0;
+        left: 0;
+        animation: fadeIn .2s ease-in;
+    }
+    &__title {
+        @extend %flexCC;
+        background-color: $matrPink;
+        color: white;
+        font-size: 1.2rem;
+        font-family: 'Lato', sans-serif;
+        padding: 12px 0;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        text-indent: 6px;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(50px); }
+    to { transform: translateY(0); }
+}
+

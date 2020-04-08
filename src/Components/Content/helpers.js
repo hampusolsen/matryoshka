@@ -101,17 +101,3 @@ export function getCompareFunction(sortingOptions) {
             return compareNone;
     }
 }
-
-// Splits the 25 first entries in filesContinued
-export function splitEntries(filesContinued) {
-    if (filesContinued.length <= 25) {
-        const files = {
-            entries: filesContinued.splice(0, 25),
-            has_more: filesContinued.length ? true : false,
-        }
-
-        return [files, filesContinued];
-    }
-
-    return [filesContinued, []];
-}

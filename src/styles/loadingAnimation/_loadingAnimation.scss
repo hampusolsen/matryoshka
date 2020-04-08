@@ -1,0 +1,35 @@
+.loading-animation {
+    height: 72px;
+    width: 148px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__ball {
+        width: 18px;
+        height: 18px;
+        background-color: $matrPink;
+        border-radius: 50%;
+        transform: scale(0.25);
+        animation: 0.75s ease-in-out infinite shrinkGrow;
+        &:nth-child(2) { animation-delay: 0.125s; }
+        &:nth-child(3) { animation-delay: 0.25s; }
+        &:nth-child(4) { animation-delay: 0.375s; }
+        &:nth-child(5) { animation-delay: 0.5s; }
+    }
+}
+
+@keyframes shrinkGrow {
+    0% { transform: scale(0.25); }
+    50% { transform: scale(1); }
+    100% { transform: scale(0.25); }
+}
+
+@keyframes float {
+    0% { top: -1rem; }
+    50% { top: -1.25rem; }
+    100% { top: -1rem; }
+}
